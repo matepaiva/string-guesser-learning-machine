@@ -1,24 +1,40 @@
-import { nOfGenerations } from './config';
 import Generation from './generation.class';
 
 
 export default class Lineage {
-    constructor(refStr) {
+    constructor(config, parents) {
         this.id = 0;
-        this.nOfGenerations = nOfGenerations;
-        this.refStr = refStr;
-        this.parents = undefined;
+        this.config = config;
+        this.refStr = config.refStr;
+        this.parents = parents;
     }
-    runGeneration() {
-        let gen = new Generation(this.id, this.refStr, this.parents);
+    runNewGeneration() {
+        let gen = new Generation(this.id, this.config, this.parents);
         this.parents = gen.getTheTwoBestChildren();
-        console.log(`[${this.id}]: ${this.parents[0].sample[0]} | ${this.parents[0].grade}`);
+        // console.log(`[${this.id}]: ${this.parents[0].sample[0]} | ${this.parents[0].grade}`);
         this.id++;
     }
-    iterateOverGenerations() {
-        while (this.id < this.nOfGenerations) {
-            this.runGeneration();
+    getBestParents() {
+        while (!this.areParentsDnaEqual(this.parents)) {
+            this.runNewGeneration();
         }
         return this.parents;
+    }
+    areParentsDnaEqual(parents) {
+        if (!parents) { return false; }
+        let p1StrDna = this.DnaToString(parents[0].dna);
+        let p2StrDna = this.DnaToString(parents[1].dna);
+        return p1StrDna === p2StrDna;
+    }
+    DnaToString(dna) {
+        let str = "";
+        for (var i = 0; i < dna.length; i++) {
+            let charDna = dna[i].dna;
+            for (var key in charDna) {
+                str += charDna[key];
+            }
+        }
+        // console.log(str);
+        return str;
     }
 }

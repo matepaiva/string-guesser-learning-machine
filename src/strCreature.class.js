@@ -1,14 +1,13 @@
-import { sizeOfSample } from './config';
 import CharDna from './charDna.class';
 export default class strCreature {
-    constructor(id, refStr, parentsDna) {
+    constructor(id, config, parentsDna) {
         this.id = id;
-        this.nOfChars = refStr.length;
-        this.refStr = refStr;
+        this.nOfChars = config.refStr.length;
+        this.refStr = config.refStr;
         this.parentsDna = parentsDna;
         this.dna = this.generateDna(this.parentsDna, this.nOfChars);
-        this.sample = this.generateSample(sizeOfSample, this.dna);
-        this.grade = this.calculateGradeFromSample(this.sample, this.refStr);
+        this.sample = this.generateSample(config.sizeOfSample, this.dna);
+        this.grade = this.calculateGradeFromSample(this.sample, config.refStr);
     }
     generateDna(parentsDna, nOfChars) {
         let arr = [];
@@ -50,9 +49,9 @@ export default class strCreature {
         let grade = 0;
         for (let i = 0; i < str.length; i++) {
             if (str[i] === refStr[i]) {
-                grade = grade + 3;
-            } else if (refStr.indexOf(str[i]) !== -1) {
-                grade = grade + 1;
+                grade = grade + 5;
+            // } else if (refStr.indexOf(str[i]) !== -1) {
+            //     grade = grade + 1;
             } else {
                 grade = grade - 1;
             }

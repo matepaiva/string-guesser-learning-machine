@@ -1,8 +1,7 @@
 import "babel-core/register";
 import "babel-polyfill";
 
-import Lineage from './lineage.class';
+import config from './config';
+import Cross from './cross.class';
 
-
-var lineage = new Lineage('mate');
-lineage.iterateOverGenerations();
+new Cross(config).startCrossingUntil();
