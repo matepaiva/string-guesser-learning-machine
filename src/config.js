@@ -1,6 +1,6 @@
 export default {
-    generationSize: 64,
+    generationSize: 20,
     nOfCross: 500000000048,
-    sizeOfSample: 64,
-    refStr: 'Mate'
+    sizeOfSample: 200,
+    refStr: 't amo'
 };

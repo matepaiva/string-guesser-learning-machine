@@ -2,6 +2,6 @@ import "babel-core/register";
 import "babel-polyfill";
 
 import config from './config';
-import Cross from './cross.class';
+import Lineage from './lineage.class';
 
-new Cross(config).startCrossingUntil();
+new Lineage(config).getBestParents();

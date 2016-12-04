@@ -11,12 +11,15 @@ export default class Lineage {
     runNewGeneration() {
         let gen = new Generation(this.id, this.config, this.parents);
         this.parents = gen.getTheTwoBestChildren();
-        // console.log(`[${this.id}]: ${this.parents[0].sample[0]} | ${this.parents[0].grade}`);
+        console.log(`[${this.id}]: ${this.parents[0].sample[0]} | ${this.parents[0].grade}`);
         this.id++;
     }
     getBestParents() {
-        while (!this.areParentsDnaEqual(this.parents)) {
+        // while (!this.areParentsDnaEqual(this.parents)) {
+        let i = 0;
+        while (i < 60000) {
             this.runNewGeneration();
+            i++;
         }
         return this.parents;
     }
@@ -24,6 +27,7 @@ export default class Lineage {
         if (!parents) { return false; }
         let p1StrDna = this.DnaToString(parents[0].dna);
         let p2StrDna = this.DnaToString(parents[1].dna);
+        if (p1StrDna === p2StrDna) { console.log("FODEEEEU"); }
         return p1StrDna === p2StrDna;
     }
     DnaToString(dna) {
